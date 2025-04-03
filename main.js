@@ -33,7 +33,6 @@ async function loadSights(url) {
         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
     }).addTo(map);
 }
-loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
 
 // Funktion loadLines
 async function loadLines(url) {
