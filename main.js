@@ -38,3 +38,40 @@ async function loadSights(url) {
     }).addTo(map);
 }
 loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
+
+// Funktion loadLines
+async function loadLines(url) {
+    //console.log(url);
+     let response = await fetch(url);
+     let jsondata = await response.json();
+     //console.log(jsondata);
+     L.geoJSON(jsondata, {
+         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+     }).addTo(map);
+ }
+ loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+ 
+ // Funktion loadStops
+ async function loadStops(url) {
+    //console.log(url);
+     let response = await fetch(url);
+     let jsondata = await response.json();
+     //console.log(jsondata);
+     L.geoJSON(jsondata, {
+         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+     }).addTo(map);
+ }
+ loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+ // FunktionloadZones
+ async function loadZones(url) {
+    //console.log(url);
+     let response = await fetch(url);
+     let jsondata = await response.json();
+     //console.log(jsondata);
+     L.geoJSON(jsondata, {
+         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+     }).addTo(map);
+ }
+ loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
+ 
