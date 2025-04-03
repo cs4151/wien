@@ -49,7 +49,7 @@ async function loadSights(url) {
     //console.log(jsondata);
     L.geoJSON(jsondata, {
         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-    }).addTo(map);
+    }).addTo(overlays.sights);
 }
 
 // Funktion loadLines
@@ -60,7 +60,7 @@ async function loadLines(url) {
      //console.log(jsondata);
      L.geoJSON(jsondata, {
          attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(map);
+     }).addTo(overlays.lines);
  }
  
  // Funktion loadStops
@@ -71,7 +71,7 @@ async function loadLines(url) {
      //console.log(jsondata);
      L.geoJSON(jsondata, {
          attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(map);
+     }).addTo(overlays.stops);
  }
  
 
@@ -83,7 +83,7 @@ async function loadLines(url) {
      //console.log(jsondata);
      L.geoJSON(jsondata, {
          attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(map);
+     }).addTo(overlays.zones);
  }
 
  loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
