@@ -13,24 +13,28 @@ let map = L.map("map").setView([stephansdom.lat, stephansdom.lng], stephansdom.z
 
 // overlays definieren
 let overlays = {
- sights: L.featureGroup().addTo(map),
-  lines: L.featureGroup().addTo(map),
-  stops: L.featureGroup().addTo(map),
-  zones: L.featureGroup().addTo(map),  
+    sights: L.featureGroup().addTo(map),
+    lines: L.featureGroup().addTo(map),
+    stops: L.featureGroup().addTo(map),
+    zones: L.featureGroup().addTo(map),
 }
 
 
 //Layercontrol 
 L.control.layers({
-"BasemapAT grau": L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmapgrau/normal/google3857/{z}/{y}/{x}.png', {
-    maxZoom: 19,
-    attribution: 'Hintergrundkarte: <a href="https://www.basemap.at">basemap.at</a>'
-}).addTo(map)
+    "BasemapAT": L.tileLayer.provider('BasemapAT.basemap').addTo(map),
+    "BasemapAT grau": L.tileLayer.provider('BasemapAT.grau').addTo(map),
+    "BasemapAT terrain": L.tileLayer.provider('BasemapAT.overlay').addTo(map),
+    "BasemapAT Overlay": L.tileLayer.provider('BasemapAT.overlay').addTo(map),
+    "BasemapA surface": L.tileLayer.provider('BasemapAT.surface').addTo(map),
+    "BasemapAT highdpi": L.tileLayer.provider('BasemapAT.highdpi').addTo(map),
+    "BasemapAT orthofoto": L.tileLayer.provider('BasemapAT.orthofoto').addTo(map),
+
 }, {
-"Sehenswürdigkeiten": overlays.sights,
-"Vienna sightseeing Linien": overlays.lines,
-"Vienna sightseeing Haltestellen": overlays.stops,
-"Fußgängerzonen": overlays.zones,
+    "Sehenswürdigkeiten": overlays.sights,
+    "Vienna sightseeing Linien": overlays.lines,
+    "Vienna sightseeing Haltestellen": overlays.stops,
+    "Fußgängerzonen": overlays.zones,
 }).addTo(map);
 
 
@@ -43,7 +47,7 @@ L.control.scale({
 
 //Sehenswürdigkeiten Standorte in Wien
 async function loadSights(url) {
-   //console.log(url);
+    //console.log(url);
     let response = await fetch(url);
     let jsondata = await response.json();
     //console.log(jsondata);
@@ -55,38 +59,38 @@ async function loadSights(url) {
 // Funktion loadLines
 async function loadLines(url) {
     //console.log(url);
-     let response = await fetch(url);
-     let jsondata = await response.json();
-     //console.log(jsondata);
-     L.geoJSON(jsondata, {
-         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(overlays.lines);
- }
- 
- // Funktion loadStops
- async function loadStops(url) {
-    //console.log(url);
-     let response = await fetch(url);
-     let jsondata = await response.json();
-     //console.log(jsondata);
-     L.geoJSON(jsondata, {
-         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(overlays.stops);
- }
- 
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    //console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+    }).addTo(overlays.lines);
+}
 
- // FunktionloadZones
- async function loadZones(url) {
+// Funktion loadStops
+async function loadStops(url) {
     //console.log(url);
-     let response = await fetch(url);
-     let jsondata = await response.json();
-     //console.log(jsondata);
-     L.geoJSON(jsondata, {
-         attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-     }).addTo(overlays.zones);
- }
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    //console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+    }).addTo(overlays.stops);
+}
 
- loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
- loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json")
- loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
- loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
+
+// FunktionloadZones
+async function loadZones(url) {
+    //console.log(url);
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    //console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+    }).addTo(overlays.zones);
+}
+
+loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+loadLines("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json")
+loadStops("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKHTSVSLOGD&srsName=EPSG:4326&outputFormat=json");
+loadZones("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
