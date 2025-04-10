@@ -65,7 +65,30 @@ async function loadLines(url) {
     let jsondata = await response.json();
     //console.log(jsondata);
     L.geoJSON(jsondata, {
-        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>",
+        style: function (feature) {
+            console.log(feature.properties.LINE_NAME);
+            let lineColor;
+
+            if (feature.properties.LINE_NAME == "Yellow Line") {
+                lineColor = "#FFDC00";
+            } else if (feature.properties.LINE_NAME == "Blue Line") {
+                lineColor = "#0074D9";
+            } else if (feature.properties.LINE_NAME == "Red Line") {
+                lineColor = "#FF4136";
+            } else if (feature.properties.LINE_NAME == "Green Line") {
+                lineColor = "#2ECC40";
+            } else if (feature.properties.LINE_NAME == "Orange Line") {
+                lineColor = "#FF851B";
+            } else if (feature.properties.LINE_NAME == "Grey Line") {
+                lineColor = "#AAAAAA";
+            } else{
+                lineColor = "#111111";
+            }
+            return {
+            color: lineColor 
+            }
+        }
     }).addTo(overlays.lines);
 }
 
@@ -88,7 +111,7 @@ async function loadZones(url) {
     let jsondata = await response.json();
     //console.log(jsondata);
     L.geoJSON(jsondata, {
-        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>", 
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>",
         style: function (feature) {
             //console.log(feature);
             return {
@@ -103,14 +126,14 @@ async function loadZones(url) {
 }
 
 // Fuktion load Hotels
-    async function loadHotels(url) {
-        //console.log(url);
-        let response = await fetch(url);
-        let jsondata = await response.json();
-        //console.log(jsondata);
-        L.geoJSON(jsondata, {
-            attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
-        }).addTo(overlays.hotels);
+async function loadHotels(url) {
+    //console.log(url);
+    let response = await fetch(url);
+    let jsondata = await response.json();
+    //console.log(jsondata);
+    L.geoJSON(jsondata, {
+        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>"
+    }).addTo(overlays.hotels);
 }
 
 //loadSights("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
