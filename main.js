@@ -12,7 +12,7 @@ let stephansdom = {
 let map = L.map("map", {
     maxZoom: 19
 }
-    
+
 ).setView([stephansdom.lat, stephansdom.lng], stephansdom.zoom);
 
 // overlays definieren
