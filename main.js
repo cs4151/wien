@@ -4,7 +4,7 @@
 let stephansdom = {
     lat: 48.208493,
     lng: 16.373118,
-    zoom: 12,
+    zoom: 14,
     title: "Domkirche St. Stephan",
 };
 
