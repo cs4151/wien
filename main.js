@@ -230,7 +230,7 @@ async function loadHotels(url) {
         
          <h3><strong>${feature.properties.BETRIEB}</strong></h3>
          <p><start><strong> Hotel ${feature.properties.KATEGORIE_TXT}</strong></start></p>
-    
+    <hr style="border: 11px solid black; margin: 4px 0;">
          <adresse>Addr.:${feature.properties.ADRESSE}</adresse><br>
          Tel.:<a href="Tel:${feature.properties.KONTAKT_TEL}">${feature.properties.KONTAKT_TEL}</a><br>
           <a href="mailto: ${feature.properties.KONTAKT_EMAIL}"style="margin-left: 2px;">${feature.properties.KONTAKT_EMAIL}</a><br>
