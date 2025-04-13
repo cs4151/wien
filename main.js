@@ -179,7 +179,9 @@ async function loadZones(url) {
         layer.bindPopup(`
     
      <adresse><strong>Fußgängerzone ${feature.properties.ADRESSE}</strong></adresse>
-     <p><zeitraum><i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM}</zeitraum></p>
+       ${feature.properties.ZEITRAUM && feature.properties.ZEITRAUM !== "null" ? `
+            <p><zeitraum><i class="fa-regular fa-clock"></i> ${feature.properties.ZEITRAUM}</zeitraum></p>
+        ` : ''}
      <p><i class="fa-solid fa-circle-info"></i> ${feature.properties.AUSN_TEXT}</info></p>
             `);
     }
