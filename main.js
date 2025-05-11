@@ -133,9 +133,10 @@ async function loadStops(url) {
     let jsondata = await response.json();
     //console.log(jsondata);
     L.geoJSON(jsondata, {
-        attribution: "Datenquelle: <ahref='https://data.wien.gv.at'>Stadt Wien</a>",
+        attribution: "Datenquelle: <a href='https://data.wien.gv.at'>Stadt Wien</a>",
         pointToLayer: function (feature, latlng) {
-            console.log(feature.properties);
+            //console.log(feature.properties);
+
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: `icons/bus_${feature.properties.LINE_ID}.png`,
@@ -145,15 +146,14 @@ async function loadStops(url) {
             });
         },
         onEachFeature: function (feature, layer) {
-            console.log(feature.properties);
             layer.bindPopup(`
-        
-         <h3><strong><i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</strong></h3>
-         <p><stopname>${feature.properties.STAT_NAME}</stopname></p>
-                `);
+                <h4><i class="fa-solid fa-bus"></i> ${feature.properties.LINE_NAME}</h4>
+                <p> ${feature.properties.STAT_ID} ${feature.properties.STAT_NAME}</p>
+            `);
         }
     }).addTo(overlays.stops);
 }
+
 
 
 // FunktionloadZones
